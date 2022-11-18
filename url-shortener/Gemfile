@@ -9,4 +9,8 @@ group :development, :test do
   gem 'rubocop-rails', require: false
 end
 
+group :test do
+  gem 'database_cleaner-sequel'
+end
+
 gemspec
