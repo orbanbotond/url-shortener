@@ -1,40 +1,27 @@
-### Objective
+### Algorythm
+-------------
+The shortened urls will be a conseqcutive series of base62 case sensitive alphanumerical strings.
+The algorythm will create shortened urls for each url by incrementing the previous shortened url using the next character from the base 62 alphabet.
 
-Your assignment is to implement a URL shortening service using Ruby. You can use any framework you want (or no framework at all, it is up to you).
+The base 62 alphabet will be:
+0, 1, 2, ..., 9, a, b, c, ..., y, z, A, B, C, ..., Y, Z (10 + 26 + 26 = 62)
 
-### Brief
+Source of algorythm:
+https://en.wikipedia.org/wiki/URL_shortening
 
-ShortLink is a URL shortening service where you enter a URL such as https://codesubmit.io/library/react and it returns a short URL such as http://short.est/GeAi9K.
+Genesis Record:
+- The genesis record for the Url Shortener will be: '0'
 
-### Tasks
+Encoding Urls:
+- If the Url exists in the DB then return the already encoded value for it.
+- If the Url doesn't exist in the DB then it will read the last saved tiny URL and increment it. The newly incremented string will be the new shortened URL, then save the URL/shortenedURL pair into the DB.
 
--   Implement assignment using:
-    -   Language: **Ruby**
-    -   Two endpoints are required
-        -   /encode - Encodes a URL to a shortened URL
-        -   /decode - Decodes a shortened URL to its original URL.
-    -   Both endpoints should return JSON
--   There is no restriction on how your encode/decode algorithm should work. You just need to make sure that a URL can be encoded to a short URL and the short URL can be decoded to the original URL.
-- Your application needs to be able to decode previously encoded URLs after a restart.
--   Provide detailed instructions on how to run your assignment in a separate markdown file.
--   Provide tests for both endpoints (and any other tests you may want to write).
--  You need to think through potential attack vectors on the application, and document them in the README.
--  You need to think through how your implementation may scale up, and document your approach in the README. **You do not need to build a scalable service for this challenge but you need to document how you would approach building a scalable version of it.**
+Correctness of the Algorythm:
+- Since the Encoded URLs are always an incrementing sequences of base62 chars they will always be unique, therefore there will always be a 1-1 mapping from URL to shortenedURL.
 
-### Evaluation Criteria
+Scalability:
+- The scalability will be simply ensured by the introduction of another base62 digit.
+- Example: in the begining only one base62 digit will be used for encryption. That will be enough for encoding only 62 URLs. The 63rd URL will use 2 base62 alphanumerical case sensitive characters.
+- The number of encodable URLs would be 62 on the power of number of base62 alphanumerical case sensitive characters. For 6 such 'chars' the maximum representable URLs will be: 56'800'235'584. (56+ billion). By the introduction of another 7th base62 alphanumerical case sensitive character we will expand the shortanable URLs.
 
--   **Ruby** best practices
--   API implemented featuring a /encode and /decode endpoint
--   Completeness: did you complete the features? Are all the tests running?
--   Correctness: does the functionality act in sensible, thought-out ways?
--   Maintainability: is it written in a clean, maintainable way?
--   Security: have you thought through potential issues and mitigated or documented them?
--   Scalability: what scalability issues do you foresee in your implementation and how do you plan to work around those issues?
 
-### CodeSubmit
-
-Please organize, design, test and document your code as if it were going into production - then push your changes to the master branch. After you have pushed your code, you may submit the assignment on the assignment page.
-
-All the best and happy coding,
-
-The nami.ai Team
