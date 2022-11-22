@@ -2,10 +2,10 @@ module UrlShortener
   class IncrementBase62
 
     NoMoreDigits = Class.new(StandardError)
-    DIGITS = "0123456789abcdefghijklmnopqrstuvwzxyABCDEFGHIJKLMNOPQRSTUVWZXY"
+    DIGITS = "123456789abcdefghijklmnopqrstuvwzxyABCDEFGHIJKLMNOPQRSTUVWZXY"
 
     def increment(number)
-      return "0" if number == ""
+      return "1" if number == ""
 
       last_char = number[-1]
 
@@ -21,6 +21,8 @@ module UrlShortener
 
     def next_digit(digit)
       raise NoMoreDigits if digit == "Y"
+
+      return "1" if digit == "0"
 
       DIGITS[DIGITS.index(digit) + 1]
     end
