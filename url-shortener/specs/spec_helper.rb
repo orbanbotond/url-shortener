@@ -1,3 +1,5 @@
+$url_shortener_environment ||= :test
+
 require_relative '../lib/url-shortener.rb'
 require 'database_cleaner-sequel'
 require 'pry-nav'

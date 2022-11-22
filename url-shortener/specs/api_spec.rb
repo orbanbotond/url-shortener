@@ -40,8 +40,6 @@ RSpec.describe UrlShortener::Api do
         end.to change { repo.count }.from(0).to(3)
       end
     end
-
-    context 'concurrency'
   end
 
   describe '#decode' do
