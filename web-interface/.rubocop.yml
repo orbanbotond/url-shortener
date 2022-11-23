@@ -1,0 +1,13 @@
+Metrics/BlockLength:
+  Enabled: false
+Style/Documentation:
+  Enabled: false
+Layout/LineLength:
+  Enabled: false
+
+# Metrics/MethodLength:
+#   Enabled: false
+# Metrics/PerceivedComplexity:
+#   Enabled: false
+# Metrics/CyclomaticComplexity:
+#   Enabled: false
