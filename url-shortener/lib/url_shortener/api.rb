@@ -1,5 +1,7 @@
 module UrlShortener
   class Api
+    ShortUrlNotKnown = Class.new(StandardError)
+
     def initialize(base_url)
       @base_url = base_url
 
@@ -24,6 +26,8 @@ module UrlShortener
       short_number = trim_base_url(short_url)
 
       record = repo.by_shortened_url short_number
+      raise ShortUrlNotKnown unless record
+      
       record.url
     end
 

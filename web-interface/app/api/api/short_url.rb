@@ -2,6 +2,13 @@ module Api
   class ShortUrl < Grape::API
     helpers Api::Helpers
 
+    rescue_from UrlShortener::Api::ShortUrlNotKnown do |e|
+      http_return_code = 404
+
+      rack_response({ error: 'url not known' }.to_json, http_return_code)
+    end
+
+
     format :json
 
     params do

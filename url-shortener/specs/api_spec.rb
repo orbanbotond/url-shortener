@@ -51,5 +51,13 @@ RSpec.describe UrlShortener::Api do
     it 'returns the original url' do
       expect(decode).to eq(url)
     end
+
+    context 'when trying to decode a nonexistent url' do
+      let(:shortened_url) { 'http://nonexistent.url' }
+
+      it 'raises a ShortUrlNotKnown exception' do
+        expect { decode }.to raise_error(UrlShortener::Api::ShortUrlNotKnown)
+      end
+    end
   end
 end

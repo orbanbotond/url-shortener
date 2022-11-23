@@ -80,24 +80,21 @@ RSpec.describe "Api for short_url", type: :request do
 
     context 'when the params are incomplete' do
       context 'when the url can not be found' do
-        subject(:call_request) do
-          post "/encode", params: { url: '' }
-        end
+        let(:shortened_url) { 'http://non-existing-url' }
 
         it "executes the query successfull" do
           call_request
 
-          #TODO should return not found...
-          expect(response).to have_http_status(201)
+          expect(response).to have_http_status(404)
           expect(response.content_type).to eq("application/json")
           expect { response_json }.to_not raise_error
-          expect(response_json.keys).to include('encoded_url')
+          expect(response_json['error']).to include('url not known')
         end
       end
 
       context 'when the url is missing' do
         subject(:call_request) do
-          post "/encode", params: {}
+          post "/decode", params: {}
         end
 
         it "executes the query successfull" do
