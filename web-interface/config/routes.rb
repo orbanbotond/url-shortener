@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "short_urls#index"
 
+  mount Api::Endpoints => '/'
+
   resources :short_urls, only: [:index, :create] do
     post :decode, on: :collection
   end
