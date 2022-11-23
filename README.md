@@ -33,15 +33,17 @@ Architecture:
   - simple UI: intended to be used by humans.
   - http based API: with 2 endpoints: /encode /decode. Intended to be consumed by 3rd parties.
 
+- Every single feature was developed purely test drive, test first!
 - Technologies used
 	- Url Shortener module
 		- pure ruby for the url-shortener
 		- repository for a relational DB using romrb for persisting the encoded urls in the url-shortener (repository pattern instead of the infinite interface of ActiveRecord)
 	- Web Interface module
-		- Grape based DSL for the http based API
-		- slim markup for rendering the human consumable UI
-		- no AR
-		- Capibara to spec the human readable UI
+		- Grape based DSL for the http based API. Rationale: this way the http API is open for extension, O from the sOlid principles
+		- Grape Entities for serializing the retuned values from API. Rationale: more OO like that builder templating.
+		- slim markup for rendering the human consumable UI. Raionale: more readable.
+		- no AR. Rationale: no infinite interface for AR. Just precisely define interface for persistence. 
+		- Capibara to spec the human readable UI.
 		- Request specs to spec the http based API
 	- make files to run all the specs at one snap
 	- postgres as persistent storage
@@ -59,9 +61,9 @@ Architecture:
     ..................
     Finished in 2.07 seconds (files took 0.39583 seconds to load)
     18 examples, 0 failures
-`
+    ```
 
-- 
+ 
 	- run web-interface: in the `web-interface` directory run: `bundle exec rails s` 
 	- at this point you can browse the url-shortener by visiting: `http://localhost:3000/short_urls`
 	- you can call the api endpoints manually with curl command by:  `curl -X POST http://localhost:3000/encode -H 'Content-Type: application/json' -d '{"url":"https://www.linkedin.com/in/orbanbotond/"}'`
