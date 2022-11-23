@@ -8,20 +8,20 @@
 #   git config --global core.excludesfile '~/.gitignore_global'
 
 # Ignore bundler config.
-web-ui/.bundle
+web-interface/.bundle
 
 # Ignore all logfiles and tempfiles.
-web-ui/log/*
-web-ui/tmp/*
-!web-ui/log/.keep
-!web-ui/tmp/.keep
+web-interface/log/*
+web-interface/tmp/*
+!web-interface/log/.keep
+!web-interface/tmp/.keep
 
 # Ignore pidfiles, but keep the directory.
-web-ui/tmp/pids/*
-!web-ui/tmp/pids/
-!web-ui/tmp/pids/.keep
+web-interface/tmp/pids/*
+!web-interface/tmp/pids/
+!web-interface/tmp/pids/.keep
 
-web-ui/public/assets
+web-interface/public/assets
 
 # Ignore master key for decrypting credentials and more.
-web-ui/config/master.key
+web-interface/config/master.key

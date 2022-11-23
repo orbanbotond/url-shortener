@@ -6,7 +6,7 @@ RSpec.describe "Tiny Url Generation", :type => :system do
   end
 
   it "provides a form to shorten the target url" do
-    visit "/"
+    visit short_urls_path
 
     fill_in "url", :with => "https://www.linkedin.com/in/orbanbotond"
     click_button "Shorten"
@@ -19,7 +19,7 @@ RSpec.describe "Tiny Url Generation", :type => :system do
     shortener = UrlShortener::Api.new('http://tny.cm')
     link = "https://www.linkedin.com/in/orbanbotond"
     shortened_url = shortener.encode link
-    visit "/"
+    visit short_urls_path
 
     fill_in "shortened_url", :with => shortened_url
     click_button "Decode"
