@@ -5,7 +5,7 @@ RSpec.describe "Tiny Url Generation", :type => :system do
     driven_by(:selenium_chrome_headless)
   end
 
-  it "provides a form to enter the target url" do
+  it "provides a form to shorten the target url" do
     visit "/"
 
     fill_in "url", :with => "https://www.linkedin.com/in/orbanbotond"
