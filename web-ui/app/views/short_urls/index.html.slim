@@ -1,0 +1,5 @@
+div
+  = form_with url: "/short_urls", method: :post do |form|
+    = form.label :url, "Url:"
+    = form.text_field :url
+    = form.submit "Shorten"
