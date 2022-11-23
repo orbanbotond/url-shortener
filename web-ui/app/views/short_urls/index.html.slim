@@ -1,5 +1,14 @@
 div
-  = form_with url: "/short_urls", method: :post do |form|
-    = form.label :url, "Url:"
-    = form.text_field :url
-    = form.submit "Shorten"
+  div
+    p "Shorten"
+    = form_with url: short_urls_path, method: :post do |form|
+      = form.label :url, "Url:"
+      = form.text_field :url
+      = form.submit "Shorten"
+
+  div
+    p "Decode"
+    = form_with url: decode_short_urls_path, method: :post do |form|
+      = form.label :shortened_url, "Url:"
+      = form.text_field :shortened_url
+      = form.submit "Decode"
