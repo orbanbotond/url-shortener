@@ -28,5 +28,57 @@ Architecture:
 -------------------
 ![alt text](./diagrams/architecture.png)
 
+- As seen in the above diagram the url shortener consists of a core which contains the base62 counter and its API: encode/decode
+- Then there is a web-interface which consists of 2 part:
+  - simple UI: intended to be used by humans.
+  - http based API: with 2 endpoints: /encode /decode. Intended to be consumed by 3rd parties.
 
+- Technologies used
+	- Url Shortener
+		- pure ruby for the url-shortener
+		- repository for a relational DB using romrb for persisting the encoded urls in the url-shortener (repository pattern instead of the infinite interface of AR)
+	- Web Interface
+		- Grape based DSL for the http based API
+		- slim markup for rendering the human consumable UI
+		- no AR
+		- Capibara to spec the human readable UI
+		- Request specs to spec the http based API
+	- make files to run all the specs at one snap
+	- postgres as persistent storage
+- Run the project: 
+	- create the db for testing: shortened_urls_test
+	- create the db for dev:  shortened_urls_development
+	- create a .env file based on url-shortener/.env.example
+	- run `bundle install` both in `url-shortener` and `web-interface` directories
+	- in the url-shortener directory run: `bundle exec rake db:migrate` and `ENVIRONMENT=test bundle exec rake db:migrate`
+	- in the main directory run `make test`  everything should pass like here:
+	 ```
+	 make test
+DEBUGGER: Attaching after process 31212 fork to child process 31225
+........
 
+Finished in 2.69 seconds (files took 0.95764 seconds to load)
+8 examples, 0 failures
+
+..................
+
+Finished in 2.07 seconds (files took 0.39583 seconds to load)
+18 examples, 0 failures
+```
+	- run web-interface: in the `web-interface` directory run: `bundle exec rails s`
+	- at this point you can browse the url-shortener by visiting: `http://localhost:3000/short_urls`
+	- you can call the api endpoints manually with curl command by:
+	```
+	curl -X POST http://localhost:3000/encode \
+   -H 'Content-Type: application/json' \
+   -d '{"url":"https://www.linkedin.com/in/orbanbotond/"}'
+	```
+	Then You should get back a shortened url like: `{"encoded_url":"http://tny.cm/b"}`
+
+	Then You can decode this url back to the original like:
+	```
+	curl -X POST http://localhost:3000/decode \
+   -H 'Content-Type: application/json' \
+   -d '{"url":"http://tny.cm/b"}'
+	```
+	And You should receive the original url in a json like: `{"decoded_url":"https://www.linkedin.com/in/orbanbotond/"}`
