@@ -24,4 +24,9 @@ Scalability:
 - Example: in the begining only one base62 digit will be used for encryption. That will be enough for encoding only 62 URLs. The 63rd URL will use 2 base62 alphanumerical case sensitive characters.
 - The number of encodable URLs would be 62 on the power of number of base62 alphanumerical case sensitive characters. For 6 such 'chars' the maximum representable URLs will be: 56'800'235'584. (56+ billion). By the introduction of another 7th base62 alphanumerical case sensitive character we will expand the shortanable URLs.
 
+Architecture:
+-------------------
+![alt text](./diagrams/architecture.png)
+
+
 

@@ -1,8 +1,4 @@
-# CONTEXTS = $(shell find ./ -type d -maxdepth 1 -mindepth 1 -exec basename {} \;)
-# CONTEXTS = $(shell find ./ -type d -maxdepth 1 -mindepth 1 d -name .git -exec basename {} \;)
-# CONTEXTS = $(shell find ./ -type d -maxdepth 1 -mindepth 1 -not \( -path "*/.git/*" -prune \) -exec basename {} \;)
-CONTEXTS = $(shell find ./ -type d -maxdepth 1 -mindepth 1 -not -path "*/.git*" -exec basename {} \;)
-# 									find -not \( -path ./.git -prune \) -type f
+CONTEXTS = $(shell find ./ -type d -maxdepth 1 -mindepth 1 -not -path "*/.git*" -not -path "*/diagrams*" -exec basename {} \;)
 
 $(addprefix test-, $(CONTEXTS)):
 	@make -C $(subst test-,,$@) test

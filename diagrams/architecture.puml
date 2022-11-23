@@ -1,0 +1,20 @@
+@startuml
+
+package "UrlShortener" {
+  [UrlShortenerCore] - UrlShortenerAPI
+}
+
+package "WebInterface" {
+  [API]
+  [UI]
+}
+
+database "RDBMS" {
+	[UrlShortenerDB]
+}
+
+"UrlShortenerCore" ---> UrlShortenerDB : uses
+"API" --> UrlShortenerAPI
+"UI" --> UrlShortenerAPI
+
+@enduml
