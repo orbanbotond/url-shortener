@@ -16,12 +16,14 @@ module UrlShortener
 
       new_short_number = nil
 
-      previous_locked do |_previous|
+      # previous_locked do |_previous|
         new_short_number = IncrementBase62.new.increment(repo.last_record.shortened_url)
         repo.create url:, shortened_url: new_short_number, created_at: DateTime.now
-      end
+      # end
 
       add_to_base_url(new_short_number)
+    rescue
+      retry
     end
 
     def decode(short_url)
@@ -40,7 +42,7 @@ module UrlShortener
     end
 
     def repo
-      UrlShortener::DataMapper::DatabaseConnection.new(UrlShortener::DataMapper::DatabaseConnection.connection_options).shortened_url_repo
+      @repo ||= UrlShortener::DataMapper::DatabaseConnection.shortened_url_repo
     end
 
     def previous_locked(&block)

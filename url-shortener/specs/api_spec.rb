@@ -7,6 +7,7 @@ RSpec.describe UrlShortener::Api do
     subject(:encoder) { described_class.new(base_url).encode(url) }
     let(:url) { 'http://whatever.com' }
     let(:base_url) { 'http://tny.com' }
+    let(:repo) { UrlShortener::DataMapper::DatabaseConnection.shortened_url_repo }
 
     it 'return a new tiny url' do
       expect(encoder).to be_a(String)
@@ -17,14 +18,11 @@ RSpec.describe UrlShortener::Api do
     end
 
     it 'creates a DB record + genesis record' do
-      repo = UrlShortener::DataMapper::DatabaseConnection.new(UrlShortener::DataMapper::DatabaseConnection.connection_options).shortened_url_repo
-
       expect { encoder }.to change { repo.count }.from(0).to(2)
     end
 
     context 'when we encode the same url we encoded previously' do
       it 'does not create a new DB record' do
-        repo = UrlShortener::DataMapper::DatabaseConnection.new(UrlShortener::DataMapper::DatabaseConnection.connection_options).shortened_url_repo
         described_class.new(base_url).encode(url)
 
         expect { encoder }.to_not change { repo.count }
@@ -33,8 +31,6 @@ RSpec.describe UrlShortener::Api do
 
     context 'we encode consequtively' do
       it 'does creates multiple DB records' do
-        repo = UrlShortener::DataMapper::DatabaseConnection.new(UrlShortener::DataMapper::DatabaseConnection.connection_options).shortened_url_repo
-
         expect do
           api = described_class.new(base_url)
           api.encode('http://google.com')

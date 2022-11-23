@@ -23,6 +23,18 @@ RSpec.describe 'Api for short_url', type: :request do
         expect { response_json }.to_not raise_error
         expect(response_json.keys).to include('encoded_url')
       end
+
+      context 'load test' do
+        it 'should execute without taking to much' do
+          require 'benchmark'
+          bm = Benchmark.measure do
+            70.times do |count|
+              post '/encode', params: { url: "http://dummyurl/#{count}" }
+            end
+          end
+          expect(bm.real < 3).to be(true)
+        end
+      end
     end
 
     context 'when the params are incomplete' do

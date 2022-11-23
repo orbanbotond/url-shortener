@@ -70,3 +70,7 @@ Architecture:
 	- Then You should get back a shortened url like: `{"encoded_url":"http://tny.cm/b"}`
 	- Then You can decode this url back to the original like: `curl -X POST http://localhost:3000/decode -H 'Content-Type: application/json' -d '{"url":"http://tny.cm/b"}'`
 	- And You should receive the original url in a json format like: `{"decoded_url":"https://www.linkedin.com/in/orbanbotond/"}`
+
+- Scalability:
+	- It is architected with scalability in mind. concurency won't be an issue from correctness perspective, since the sequence generator locks the last sequence untill a new one is generated. Ergo multi process web servers connecting to the same Relational DB will work correctly. Ergo it is scalable.
+	- Currently the load test measurements on my local machine are 70 requests under 3 secs.
