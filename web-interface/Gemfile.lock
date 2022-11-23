@@ -1,7 +1,7 @@
 PATH
   remote: ../url-shortener
   specs:
-    url-shortener (1.0.0)
+    url_shortener (1.0.0)
       dotenv-rails
       erb
       pg
@@ -364,7 +364,7 @@ DEPENDENCIES
   stimulus-rails
   turbo-rails
   tzinfo-data
-  url-shortener!
+  url_shortener!
   web-console
   webdrivers
 

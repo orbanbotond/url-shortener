@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 require_relative 'spec_helper'
 
 RSpec.describe UrlShortener::Api do
   describe '#encode' do
     subject(:encoder) { described_class.new(base_url).encode(url) }
-    let(:url) { "http://whatever.com" }
-    let(:base_url) { "http://tny.com" }
+    let(:url) { 'http://whatever.com' }
+    let(:base_url) { 'http://tny.com' }
 
     it 'return a new tiny url' do
       expect(encoder).to be_a(String)
@@ -35,8 +37,8 @@ RSpec.describe UrlShortener::Api do
 
         expect do
           api = described_class.new(base_url)
-          api.encode("http://google.com")
-          api.encode("http://facebook.com")
+          api.encode('http://google.com')
+          api.encode('http://facebook.com')
         end.to change { repo.count }.from(0).to(3)
       end
     end
@@ -44,8 +46,8 @@ RSpec.describe UrlShortener::Api do
 
   describe '#decode' do
     subject(:decode) { described_class.new(base_url).decode(shortened_url) }
-    let(:url) { "http://whatever.com" }
-    let(:base_url) { "http://tny.com" }
+    let(:url) { 'http://whatever.com' }
+    let(:base_url) { 'http://tny.com' }
     let(:shortened_url) { described_class.new(base_url).encode(url) }
 
     it 'returns the original url' do

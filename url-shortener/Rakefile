@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 require 'bundler/setup'
 Bundler.require(:development)
 
 require 'rom/sql/rake_task'
-require_relative 'lib/url-shortener'
+require_relative 'lib/url_shortener'
 
 namespace :db do
   task :setup do

@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 $url_shortener_environment ||= :test
 
-require_relative '../lib/url-shortener.rb'
+require_relative '../lib/url_shortener'
 require 'database_cleaner-sequel'
 require 'pry-nav'
 

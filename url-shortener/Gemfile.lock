@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    url-shortener (1.0.0)
+    url_shortener (1.0.0)
       dotenv-rails
       erb
       pg
@@ -31,7 +31,7 @@ GEM
       tzinfo (~> 2.0)
     ast (2.4.2)
     builder (3.2.4)
-    cgi (0.3.3)
+    cgi (0.3.5)
     coderay (1.1.3)
     concurrent-ruby (1.1.10)
     crass (1.0.6)
@@ -131,7 +131,7 @@ GEM
       dry-core (~> 1.0)
       dry-initializer (~> 3.0, >= 3.0.1)
       rom-core (~> 5.3, >= 5.3.0)
-    rom-sql (3.6.0)
+    rom-sql (3.6.1)
       dry-core (~> 1.0)
       dry-types (~> 1.0)
       rom (~> 5.2, >= 5.2.1)
@@ -182,7 +182,7 @@ DEPENDENCIES
   pry-nav
   rspec
   rubocop-rails
-  url-shortener!
+  url_shortener!
 
 RUBY VERSION
    ruby 3.1.2p20

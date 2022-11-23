@@ -45,7 +45,7 @@ gem 'slim'
 # Domain Logic Related Gems
 gem 'grape'
 gem 'grape-entity'
-gem 'url-shortener', path: '../url-shortener'
+gem 'url_shortener', path: '../url-shortener'
 
 # Use Sass to process CSS
 # gem "sassc-rails"

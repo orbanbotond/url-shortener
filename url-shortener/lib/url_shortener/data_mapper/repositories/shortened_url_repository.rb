@@ -23,17 +23,17 @@ module UrlShortener
         end
 
         def by_url(url)
-          shortened_urls.where(url: url).to_a.first
+          shortened_urls.where(url:).to_a.first
         end
 
         def by_shortened_url(shortened_url)
-          shortened_urls.where(shortened_url: shortened_url).to_a.first
+          shortened_urls.where(shortened_url:).to_a.first
         end
 
-      private
+        private
 
         def last
-          shortened_urls.order{ created_at.desc }.limit(1)
+          shortened_urls.order { created_at.desc }.limit(1)
         end
       end
     end

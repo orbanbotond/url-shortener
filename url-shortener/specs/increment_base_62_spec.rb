@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'spec_helper'
 
 RSpec.describe UrlShortener::IncrementBase62 do
@@ -58,7 +60,7 @@ RSpec.describe UrlShortener::IncrementBase62 do
       end
 
       it 'change from Y to 10' do
-        expect(increment).to eq("10")
+        expect(increment).to eq('10')
       end
 
       context 'when there are 2 characters' do
@@ -83,7 +85,7 @@ RSpec.describe UrlShortener::IncrementBase62 do
         base62_counter = described_class.new
         count = '0'
 
-        (62 ** 2).times do |counter|
+        (62**2).times do |_counter|
           count = base62_counter.increment(count)
         end
 
@@ -92,7 +94,7 @@ RSpec.describe UrlShortener::IncrementBase62 do
 
         count = '0'
 
-        (62 ** 3).times do |counter|
+        (62**3).times do |_counter|
           count = base62_counter.increment(count)
         end
 
