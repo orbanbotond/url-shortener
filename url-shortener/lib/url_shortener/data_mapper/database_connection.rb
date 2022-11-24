@@ -22,14 +22,14 @@ module UrlShortener
         end
 
         def init(db_config = {})
-          config = ROM::Configuration.new(:sql, self.connection_uri(self.connection_options), db_config)
-          config.register_relation(DataMapper::Relations::ShortenedUrls)
+          @config ||= ROM::Configuration.new(:sql, self.connection_uri(self.connection_options), db_config)
+          @config.register_relation(DataMapper::Relations::ShortenedUrls)
 
-          @rom_container = ROM.container(config)
+          @rom_container ||= ROM.container(@config)
         end
 
         def shortened_url_repo
-          init(UrlShortener::DataMapper::DatabaseConnection.connection_options)
+          init
           @shortened_url_repo ||= UrlShortener::DataMapper::Repositories::ShortenedUrlRepository.new(container: @rom_container)
         end
       end

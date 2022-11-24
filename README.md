@@ -73,4 +73,4 @@ Architecture:
 
 - Scalability:
 	- It is architected with scalability in mind. concurency won't be an issue from correctness perspective, since the sequence generator locks the last sequence untill a new one is generated. Ergo multi process web servers connecting to the same Relational DB will work correctly. Ergo it is scalable.
-	- Currently the load test measurements on my local machine are 70 requests under 3 secs.
+	- Currently the load test measurements on my local machine are 200 requests under 1 secs. (Interesting that if I use the lock mechanism the performance increases by 30%. From 1.27 sec down to 0.9132)

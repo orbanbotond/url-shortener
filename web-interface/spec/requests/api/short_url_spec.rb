@@ -28,11 +28,13 @@ RSpec.describe 'Api for short_url', type: :request do
         it 'should execute without taking to much' do
           require 'benchmark'
           bm = Benchmark.measure do
-            70.times do |count|
-              post '/encode', params: { url: "http://dummyurl/#{count}" }
+            200.times do |count|
+              url = "http://dummyurl/#{count}"
+              post '/encode', params: { url: url }
             end
           end
-          expect(bm.real < 3).to be(true)
+          puts "Done in: #{bm.real} secs"
+          expect(bm.real < 1.5).to be(true)
         end
       end
     end
